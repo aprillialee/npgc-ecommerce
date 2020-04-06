@@ -3,6 +3,8 @@ import React from "react";
 import FormInput from "../Form-Input/Form-Input.Component";
 import CustomButton from "../Custom-Button/Custom-Button.Component";
 
+import {signInWithGoogle} from "../../firebase/firebase.utils";
+
 import "./sign-in.style.scss";
 
 class SignIn extends React.Component {
@@ -11,17 +13,17 @@ class SignIn extends React.Component {
 
     this.state = {
       email: "",
-      password: ""
+      password: "",
     };
   }
 
-  handleSumbit = event => {
+  handleSumbit = (event) => {
     event.preventDefault();
 
     this.setState({email: "", password: ""});
   };
 
-  handleChange = event => {
+  handleChange = (event) => {
     const {value, name} = event.target;
 
     this.setState({[name]: value});
@@ -51,8 +53,12 @@ class SignIn extends React.Component {
             label="password"
             required
           />
-
-          <CustomButton type="submit">Sign In</CustomButton>
+          <div className="buttons">
+            <CustomButton type="submit">Sign In</CustomButton>
+            <CustomButton onClick={signInWithGoogle} isGoogleSignIn>
+              Sign In With Google
+            </CustomButton>
+          </div>
         </form>
       </div>
     );
